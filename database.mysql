@@ -1,0 +1,56 @@
+CREATE DATABASE IF NOT EXISTS meu_banco;
+USE meu_banco;
+
+CREATE TABLE usuarios (
+    id_usuario  INT            NOT NULL AUTO_INCREMENT,
+    nome        VARCHAR(100)   NOT NULL,
+    idade       INT            NOT NULL,
+    email       VARCHAR(100)   NOT NULL UNIQUE,
+    telefone    VARCHAR(15)    NOT NULL,
+    senha       VARCHAR(255)   NOT NULL,
+    PRIMARY KEY (id_usuario)
+);
+
+CREATE TABLE locais (
+    id_local                  INT           NOT NULL AUTO_INCREMENT,
+    nome_espaco               VARCHAR(100)  NOT NULL,
+    tipo_espaco               VARCHAR(50)   NOT NULL,
+    tempo_espera_medio        DECIMAL(6,2)  NOT NULL,
+    horario_abertura          TIME,
+    horario_fechamento        TIME,
+    capacidade_infraestrutura INT,
+    endereco                  VARCHAR(200)  NOT NULL,
+    PRIMARY KEY (id_local)
+);
+
+CREATE TABLE datas (
+    id_data     INT           NOT NULL AUTO_INCREMENT,
+    dia         TINYINT       NOT NULL CHECK (dia  BETWEEN 1 AND 31),
+    mes         TINYINT       NOT NULL CHECK (mes  BETWEEN 1 AND 12),
+    ano         SMALLINT      NOT NULL,
+    dia_semana  VARCHAR(20)   NOT NULL,
+    e_feriado   TINYINT(1)    NOT NULL DEFAULT 0,
+    PRIMARY KEY (id_data)
+);
+
+CREATE TABLE reporte (
+    id_reporte      INT        NOT NULL AUTO_INCREMENT,
+    id_usuario      INT,
+    id_local        INT,
+    id_data         INT,
+    escala_lotacao  INT        NOT NULL CHECK (escala_lotacao BETWEEN 1 AND 5),
+    horario_reporte DATETIME   NOT NULL,
+    PRIMARY KEY (id_reporte),
+
+    CONSTRAINT fk_reporte_usuario
+        FOREIGN KEY (id_usuario)  REFERENCES usuarios (id_usuario)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+
+    CONSTRAINT fk_reporte_local
+        FOREIGN KEY (id_local)    REFERENCES locais   (id_local)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+
+    CONSTRAINT fk_reporte_data
+        FOREIGN KEY (id_data)     REFERENCES datas    (id_data)
+        ON DELETE SET NULL ON UPDATE CASCADE
+);
