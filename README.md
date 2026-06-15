@@ -1,4 +1,4 @@
-# Projeto-A3-rica-
+# Projeto-A3
 O código da interface esta na pasta INTERFACE SWING.zip
 E o banco de dados está na pasta BD_up.sql
 Sistema desenvolvido em Java para avaliação de transporte público, com foco em registrar a experiência dos usuários em relação ao tempo de espera, lotação e qualidade do serviço.
