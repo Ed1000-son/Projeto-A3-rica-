@@ -1,12 +1,10 @@
--- Script para criar o banco e a tabela do projeto A3
--- Rode este arquivo no MySQL Workbench ou pelo terminal do MySQL.
-
+--criar banco de dados
 CREATE DATABASE IF NOT EXISTS a3_transporte
   DEFAULT CHARACTER SET utf8mb4
   DEFAULT COLLATE utf8mb4_unicode_ci;
 
 USE a3_transporte;
-
+--criar as tabelas 
 CREATE TABLE IF NOT EXISTS avaliacoes (
     id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -24,10 +22,6 @@ CREATE TABLE IF NOT EXISTS avaliacoes (
     criado_em TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
-
--- Caso você tenha criado a tabela antes com o nome errado da coluna:
--- intervalo_mdio_minutos, use este comando manualmente se precisar:
--- ALTER TABLE avaliacoes CHANGE COLUMN intervalo_mdio_minutos intervalo_medio_minutos INT NULL;
 
 -- Dados fake opcionais para teste da consulta rápida e dashboard
 INSERT INTO avaliacoes (
